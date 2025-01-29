@@ -16,13 +16,13 @@ export function MovieCard({ title, rating, genres, imageUrl }: MovieCardProps) {
         />
       </div>
       <div className="mt-2">
-        <h3 className="text-lg font-medium text-white">{title}</h3>
+        <h3 className="text-md font-semibold text-white">{title}</h3>
         <div className="flex items-center gap-2">
           <span className="text-xs text-white/90">{rating}</span>
           <span className="text-xs text-white/60">|</span>
-          <span className="text-xs text-white/90">{genres.join(", ")}</span>
+          <span className="text-xs text-white/60">{genres.join(", ")}</span>
         </div>
       </div>
     </div>
   );
-} 
+}

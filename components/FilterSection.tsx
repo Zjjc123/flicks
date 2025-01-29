@@ -9,38 +9,52 @@ import { MovieCard } from "./MovieCard";
 const mockMovies = [
   {
     id: 1,
-    title: "Wild Will",
-    rating: 8.2,
-    genres: ["Experimental", "Sci-Fi"],
-    imageUrl: "/movies/wild-will.jpg",
-  },
-  {
-    id: 2,
     title: "Rabbit",
     rating: 9.3,
     genres: ["Drama", "Experimental"],
     imageUrl: "/film/rabbit.png",
   },
   {
+    id: 2,
+    title: "I Left My Home",
+    rating: 8.1,
+    genres: ["Sci-Fi", "Experimental"],
+    imageUrl: "/film/i_left_my_home.png",
+  },
+  {
     id: 3,
-    title: "The Last Dance",
-    rating: 8.7,
-    genres: ["Documentary", "Sports"],
-    imageUrl: "/film/last-dance.jpg",
+    title: "Kairos",
+    rating: 7.4,
+    genres: ["Experimental", "Sci-Fi"],
+    imageUrl: "/film/kairos.png",
   },
   {
     id: 4,
-    title: "Midnight Mystery",
-    rating: 7.9,
-    genres: ["Film Noir", "Mystery"],
-    imageUrl: "/film/midnight-mystery.jpg",
+    title: "Metasis",
+    rating: 8.5,
+    genres: ["Sci-Fi", "Drama"],
+    imageUrl: "/film/metasis.png",
   },
   {
     id: 5,
-    title: "Future Dreams",
-    rating: 8.5,
-    genres: ["Sci-Fi", "Drama"],
-    imageUrl: "/film/future-dreams.jpg",
+    title: "The Sweetness Of Lapse",
+    rating: 7.1,
+    genres: ["Sci-Fi", "Experimental"],
+    imageUrl: "/film/the_sweetness_of_lapse.png",
+  },
+  {
+    id: 6,
+    title: "Together Alone",
+    rating: 7.1,
+    genres: ["Sci-Fi", "Experimental"],
+    imageUrl: "/film/together_alone.png",
+  },
+  {
+    id: 7,
+    title: "Wild Will",
+    rating: 8.2,
+    genres: ["Experimental", "Sci-Fi"],
+    imageUrl: "/film/wild_will.png",
   },
 ];
 
@@ -75,6 +89,7 @@ const filterOptions = {
 export function FilterSection() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<string>("default");
 
   const addFilter = (filter: string) => {
     if (!selectedFilters.includes(filter)) {
@@ -98,6 +113,22 @@ export function FilterSection() {
       // Add more filter logic for DURATION and LANGUAGE
       return false;
     });
+  });
+
+  // Sort movies after filtering
+  const sortedMovies = [...filteredMovies].sort((a, b) => {
+    switch (sortBy) {
+      case "rating-high":
+        return b.rating - a.rating;
+      case "rating-low":
+        return a.rating - b.rating;
+      case "title-asc":
+        return a.title.localeCompare(b.title);
+      case "title-desc":
+        return b.title.localeCompare(a.title);
+      default:
+        return 0;
+    }
   });
 
   return (
@@ -148,10 +179,22 @@ export function FilterSection() {
             Results{" "}
             <span className="text-white/60">{filteredMovies.length} Films</span>
           </h2>
+
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="bg-white/10 text-white border border-white/20 rounded-md px-3 py-1.5 text-sm"
+          >
+            <option value="default">Sort by</option>
+            <option value="rating-high">Rating (High to Low)</option>
+            <option value="rating-low">Rating (Low to High)</option>
+            <option value="title-asc">Title (A-Z)</option>
+            <option value="title-desc">Title (Z-A)</option>
+          </select>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {filteredMovies.map((movie) => (
+          {sortedMovies.map((movie) => (
             <MovieCard
               key={movie.id}
               title={movie.title}
