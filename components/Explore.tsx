@@ -1,39 +1,10 @@
 import { MovieCard } from "./MovieCard";
-
-const featuredMovies = [
-  {
-    title: "Rabbit",
-    rating: 9.3,
-    genres: ["Drama", "Experimental"],
-    imageUrl: "/films/rabbit.png",
-  },
-  {
-    title: "I Left My Home",
-    rating: 8.1,
-    genres: ["Sci-Fi", "Experimental"],
-    imageUrl: "/films/i-left-my-home.png",
-  },
-  {
-    title: "Kairos",
-    rating: 7.4,
-    genres: ["Experimental", "Sci-Fi"],
-    imageUrl: "/films/kairos.png",
-  },
-  {
-    title: "Metasis",
-    rating: 8.5,
-    genres: ["Sci-Fi", "Drama"],
-    imageUrl: "/films/metasis.png",
-  },
-  {
-    title: "The Sweetness Of Lapse",
-    rating: 7.1,
-    genres: ["Sci-Fi", "Experimental"],
-    imageUrl: "/films/the-sweetness-of-lapse.png",
-  },
-];
+import { movies } from "@/app/data/movies";
 
 export function Explore() {
+  // Get first 5 movies for featured section
+  const featuredMovies = movies.slice(0, 5);
+
   return (
     <main className="min-h-screen bg-black">
       <div className="max-w-[2000px] mx-auto">
@@ -43,7 +14,7 @@ export function Explore() {
 
         <section className="px-12 py-8">
           {featuredMovies.map((movie) => (
-            <div className="pb-10" key={movie.title}>
+            <div className="pb-10" key={movie.id}>
               <MovieCard
                 title={movie.title}
                 rating={movie.rating}

@@ -2,54 +2,13 @@
 
 import { NavigationBar } from "@/components/NavigationBar";
 import { useState } from "react";
-
-interface Festival {
-  id: string;
-  title: string;
-  date: string;
-  location: string;
-  imageUrl: string;
-  popularity: number;
-  status: "ongoing" | "upcoming" | "ended";
-  dateAdded: string; // ISO date string
-}
-
-const festivals: Festival[] = [
-  {
-    id: "sundance-2023",
-    title: "2023 Sundance Film Festival",
-    date: "1/18–1/28",
-    location: "Salt Lake City, Utah",
-    imageUrl: "/festivals/sundance-2023.png",
-    popularity: 98,
-    status: "ended",
-    dateAdded: "2023-01-01",
-  },
-  {
-    id: "oscar-shorts-2023",
-    title: "2023 Oscar Short Films",
-    date: "2/17–3/21",
-    location: "Los Angeles, California",
-    imageUrl: "/festivals/oscar-shorts-2023.png",
-    popularity: 85,
-    status: "ongoing",
-    dateAdded: "2023-02-01",
-  },
-  {
-    id: "cannes-2023",
-    title: "2023 Cannes Film Festival",
-    date: "5/25–5/27",
-    location: "Cannes, France",
-    imageUrl: "/festivals/cannes-2023.png",
-    popularity: 100,
-    status: "upcoming",
-    dateAdded: "2023-04-15",
-  },
-];
+import { useRouter } from "next/navigation";
+import { festivals } from "./data";
 
 type Tab = "MOST POPULAR" | "ONGOING" | "NEW FESTIVALS";
 
 export default function FestivalsPage() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>("MOST POPULAR");
 
@@ -73,6 +32,10 @@ export default function FestivalsPage() {
   };
 
   const filteredFestivals = getFilteredFestivals();
+
+  const handleFestivalClick = (festivalId: string) => {
+    router.push(`/festivals/${festivalId}`);
+  };
 
   return (
     <main className="min-h-screen bg-neutral-950 pb-20">
@@ -117,6 +80,7 @@ export default function FestivalsPage() {
         {filteredFestivals.map((festival) => (
           <div
             key={festival.id}
+            onClick={() => handleFestivalClick(festival.id)}
             className="flex items-center gap-4 bg-neutral-900/50 rounded-lg p-4 cursor-pointer hover:bg-neutral-900 transition-colors"
           >
             <img
