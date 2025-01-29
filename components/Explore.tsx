@@ -5,31 +5,31 @@ const featuredMovies = [
     title: "Rabbit",
     rating: 9.3,
     genres: ["Drama", "Experimental"],
-    imageUrl: "/film/rabbit.png",
+    imageUrl: "/films/rabbit.png",
   },
   {
     title: "I Left My Home",
     rating: 8.1,
     genres: ["Sci-Fi", "Experimental"],
-    imageUrl: "/film/i_left_my_home.png",
+    imageUrl: "/films/i-left-my-home.png",
   },
   {
     title: "Kairos",
     rating: 7.4,
     genres: ["Experimental", "Sci-Fi"],
-    imageUrl: "/film/kairos.png",
+    imageUrl: "/films/kairos.png",
   },
   {
     title: "Metasis",
     rating: 8.5,
     genres: ["Sci-Fi", "Drama"],
-    imageUrl: "/film/metasis.png",
+    imageUrl: "/films/metasis.png",
   },
   {
     title: "The Sweetness Of Lapse",
     rating: 7.1,
     genres: ["Sci-Fi", "Experimental"],
-    imageUrl: "/film/the_sweetness_of_lapse.png",
+    imageUrl: "/films/the-sweetness-of-lapse.png",
   },
 ];
 

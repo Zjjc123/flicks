@@ -7,7 +7,7 @@ export function NavigationBar() {
       <div className="max-w-screen-xl mx-auto px-4">
         <div className="flex justify-around py-4">
           <Link
-            href="/films"
+            href="/"
             className="flex flex-col items-center text-neutral-400 hover:text-white"
           >
             <svg
