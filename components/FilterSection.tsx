@@ -1,28 +1,30 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { Search } from "lucide-react";
+import { X } from "lucide-react";
 import { useState } from "react";
 
 // Define filter options
 const filterOptions = {
-  COUNTRY: ["USA", "France", "Japan", "Germany", "UK", "Italy", "Spain"],
+  GENRE: [
+    "Action", "Animation", "Comedy", "Crime", 
+    "Documentary", "Drama", "Experimental", "Fantasy",
+    "Film Noir", "Historical", "Horror", "Musical",
+    "Mystery", "Political", "Psychological", "Romance",
+    "Sci-Fi", "Science", "Sports", "Thriller"
+  ],
   DURATION: ["0-30 min", "30-60 min", "60-90 min", "90+ min"],
   LANGUAGE: ["English", "French", "Japanese", "German", "Spanish", "Italian"],
-  GENRE: ["Animation", "Documentary", "Drama", "Comedy", "Horror", "Sci-Fi"],
-  AGE: ["All Ages", "7+", "13+", "16+", "18+"],
-  TECHNIQUE: ["2D Animation", "3D Animation", "Stop Motion", "Mixed Media", "Live Action"]
 };
 
 export function FilterSection() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
 
   const addFilter = (filter: string) => {
     if (!selectedFilters.includes(filter)) {
       setSelectedFilters([...selectedFilters, filter]);
     }
-    setOpenDropdown(null);
   };
 
   const removeFilter = (filter: string) => {
@@ -34,59 +36,89 @@ export function FilterSection() {
       <div className="px-6 py-8 text-white">
         <h3 className="text-xl mb-4">Filter by</h3>
 
-        <div className="flex flex-wrap gap-3">
-          {Object.entries(filterOptions).map(([category, options]) => (
-            <div key={category} className="relative">
-              <Button
-                variant="secondary"
-                size="xs"
-                className="bg-white text-black hover:bg-white/90"
-                onClick={() => setOpenDropdown(openDropdown === category ? null : category)}
-              >
-                {category} <span className="ml-1">{openDropdown === category ? '−' : '+'}</span>
-              </Button>
-              
-              {openDropdown === category && (
-                <div className="absolute z-50 mt-1 w-48 bg-white rounded-md shadow-lg">
-                  <div className="py-1">
-                    {options.map((option) => (
-                      <button
-                        key={option}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => addFilter(`${category}: ${option}`)}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input
-              type="text"
-              placeholder="Search filter..."
-              className="bg-transparent border border-white/20 rounded-md pl-10 pr-4 py-2 text-white placeholder:text-neutral-400 focus:outline-none focus:ring-1 focus:ring-white/30"
-            />
-          </div>
-
-          {selectedFilters.map((filter) => (
+        <div className="flex flex-wrap gap-6">
+          {Object.entries(filterOptions).map(([category]) => (
             <Button
-              key={filter}
-              variant="destructive"
-              size="sm"
-              className="gap-2"
-              onClick={() => removeFilter(filter)}
+              key={category}
+              variant="secondary"
+              size="xs"
+              className="bg-white text-black hover:bg-white/90"
+              onClick={() => setActiveModal(category)}
             >
-              {filter}
-              <span>×</span>
+              {category}
             </Button>
           ))}
+
+          <div className="flex-1">
+            {selectedFilters.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selectedFilters.map((filter) => (
+                  <Button
+                    key={filter}
+                    variant="destructive"
+                    size="sm"
+                    className="gap-2"
+                    onClick={() => removeFilter(filter)}
+                  >
+                    {filter}
+                    <span>×</span>
+                  </Button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {activeModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-black border border-white/20 rounded-lg p-6 max-w-2xl w-full mx-4">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl text-white">Choose your {activeModal.toLowerCase()}</h2>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setActiveModal(null)}
+                className="text-white hover:text-white/80"
+              >
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+            
+            <p className="text-white/60 text-sm mb-4">1-3 filters is recommended for better results</p>
+
+            <div className="flex flex-wrap gap-2">
+              {filterOptions[activeModal as keyof typeof filterOptions].map((option) => (
+                <button
+                  key={option}
+                  onClick={() => {
+                    addFilter(`${activeModal}: ${option}`);
+                    setActiveModal(null);
+                  }}
+                  className={`px-4 py-2 rounded-md text-sm transition-colors
+                    ${selectedFilters.includes(`${activeModal}: ${option}`)
+                      ? 'bg-white text-black'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                    }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-6 flex justify-end">
+              <Button
+                variant="secondary"
+                className="bg-white text-black hover:bg-white/90"
+                onClick={() => setActiveModal(null)}
+              >
+                Done
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
