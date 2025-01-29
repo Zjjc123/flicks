@@ -1,9 +1,9 @@
-import { MovieCard } from "./MovieCard";
-import { movies } from "@/app/data/movies";
+import { FilmCard } from "./FilmCard";
+import { films } from "@/app/data/films";
 
 export function Explore() {
-  // Get first 5 movies for featured section
-  const featuredMovies = movies.slice(0, 5);
+  // Get first 5 films for featured section
+  const featuredFilms = films.slice(0, 5);
 
   return (
     <main className="min-h-screen bg-black">
@@ -13,13 +13,14 @@ export function Explore() {
         </div>
 
         <section className="px-12 py-8">
-          {featuredMovies.map((movie) => (
-            <div className="pb-10" key={movie.id}>
-              <MovieCard
-                title={movie.title}
-                rating={movie.rating}
-                genres={movie.genres}
-                imageUrl={movie.imageUrl}
+          {featuredFilms.map((film) => (
+            <div className="pb-10" key={film.id}>
+              <FilmCard
+                id={film.id}
+                title={film.title}
+                rating={film.rating}
+                genres={film.genres}
+                imageUrl={film.imageUrl}
               />
             </div>
           ))}

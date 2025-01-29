@@ -3,8 +3,8 @@
 import { Button } from "./ui/button";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { MovieCard } from "./MovieCard";
-import { movies, filterOptions } from "@/app/data/movies";
+import { FilmCard } from "./FilmCard";
+import { films, filterOptions } from "@/app/data/films";
 
 export function FilterSection() {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -21,22 +21,22 @@ export function FilterSection() {
     setSelectedFilters(selectedFilters.filter((f) => f !== filter));
   };
 
-  // Filter movies based on selected filters
-  const filteredMovies = movies.filter((movie) => {
+  // Filter films based on selected filters
+  const filteredFilms = films.filter((film) => {
     if (selectedFilters.length === 0) return true;
 
     return selectedFilters.some((filter) => {
       const [category, value] = filter.split(": ");
       if (category === "GENRE") {
-        return movie.genres.includes(value);
+        return film.genres.includes(value);
       }
       // Add more filter logic for DURATION and LANGUAGE
       return false;
     });
   });
 
-  // Sort movies after filtering
-  const sortedMovies = [...filteredMovies].sort((a, b) => {
+  // Sort films after filtering
+  const sortedFilms = [...filteredFilms].sort((a, b) => {
     switch (sortBy) {
       case "rating-high":
         return b.rating - a.rating;
@@ -97,7 +97,7 @@ export function FilterSection() {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl text-white">
             Results{" "}
-            <span className="text-white/60">{filteredMovies.length} Films</span>
+            <span className="text-white/60">{filteredFilms.length} Films</span>
           </h2>
 
           <select
@@ -114,13 +114,14 @@ export function FilterSection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {sortedMovies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              rating={movie.rating}
-              genres={movie.genres}
-              imageUrl={movie.imageUrl}
+          {sortedFilms.map((film) => (
+            <FilmCard
+              key={film.id}
+              id={film.id}
+              title={film.title}
+              rating={film.rating}
+              genres={film.genres}
+              imageUrl={film.imageUrl}
             />
           ))}
         </div>

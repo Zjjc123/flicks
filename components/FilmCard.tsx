@@ -1,13 +1,29 @@
-interface MovieCardProps {
+"use client";
+
+import { useRouter } from "next/navigation";
+
+interface FilmCardProps {
+  id: number;
   title: string;
   rating: number;
   genres: string[];
   imageUrl: string;
 }
 
-export function MovieCard({ title, rating, genres, imageUrl }: MovieCardProps) {
+export function FilmCard({
+  id,
+  title,
+  rating,
+  genres,
+  imageUrl,
+}: FilmCardProps) {
+  const router = useRouter();
+
   return (
-    <div className="group relative cursor-pointer">
+    <div
+      className="group relative cursor-pointer"
+      onClick={() => router.push(`/films/${id}`)}
+    >
       <div className="aspect-[3/2] overflow-hidden rounded-lg bg-gray-900">
         <img
           src={imageUrl}
