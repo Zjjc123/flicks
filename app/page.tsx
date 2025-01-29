@@ -1,8 +1,9 @@
 import { Featured } from "@/components/Featured";
+import { NavigationBar } from "@/components/NavigationBar";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-neutral-950">
+    <main className="min-h-screen bg-neutral-950 pb-20">
       <Featured
         title="RABBIT"
         rating={9.3}
@@ -11,6 +12,7 @@ export default function Home() {
         image="/film/rabbit.png"
         awards={["Best First-Time Female Director"]}
       />
+      <NavigationBar />
     </main>
   );
 }
