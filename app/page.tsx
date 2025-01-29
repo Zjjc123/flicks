@@ -5,6 +5,7 @@ import { NavigationBar } from "@/components/NavigationBar";
 import { FilterSection } from "@/components/FilterSection";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Explore } from "@/components/Explore";
 
 type Tab = "EXPLORE" | "FILTERS";
 
@@ -62,7 +63,11 @@ export default function Home() {
         </button>
       </div>
 
-      {activeTab === "EXPLORE" && <div></div>}
+      {activeTab === "EXPLORE" && (
+        <div>
+          <Explore />
+        </div>
+      )}
 
       {activeTab === "FILTERS" && (
         <div>
