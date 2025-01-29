@@ -1,14 +1,16 @@
+import { Featured } from "@/components/Featured";
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-          Welcome to My Radix UI App
-        </h1>
-        <p className="text-gray-600 dark:text-gray-300">
-          This is a Next.js application using Radix UI components.
-        </p>
-      </div>
+    <main className="min-h-screen bg-neutral-950">
+      <Featured
+        title="RABBIT"
+        rating={9.3}
+        genres={["DRAMA", "EXPERIMENTAL"]}
+        description="On an afternoon in the countryside, we follow Anna's childhood memory of her Grandfather and learn about a complex relationship as events unfold."
+        image="/film/rabbit.png"
+        awards={["Best First-Time Female Director"]}
+      />
     </main>
   );
 }
