@@ -24,7 +24,7 @@ export default function Home() {
         genres={featuredFilm.genres}
         description={featuredFilm.details.description}
         image={featuredFilm.imageUrl}
-        awards={featuredFilm.awards.map((award) => award.award)}
+        awards={[featuredFilm.awards[0].award]}
       />
 
       <div className="flex w-full justify-center gap-8 mb-4 pt-4">
