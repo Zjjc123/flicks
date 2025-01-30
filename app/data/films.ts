@@ -19,6 +19,7 @@ export interface Film {
     festival: string;
     award: string;
   }[];
+  videoUrl: string;
 }
 
 export const filterOptions = {
@@ -93,6 +94,7 @@ export const films: Film[] = [
         award: "Best Experimental Short",
       },
     ],
+    videoUrl: "https://www.youtube.com/watch?v=RTTvB4UaEZA",
   },
   {
     id: 2,
