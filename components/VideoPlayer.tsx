@@ -141,13 +141,16 @@ export function VideoPlayer({
         <iframe
           ref={iframeRef}
           className="w-full h-full pointer-events-none"
-          src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&enablejsapi=1&controls=0&rel=0&modestbranding=1`}
+          src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&enablejsapi=1&controls=0&rel=0&modestbranding=1&playsinline=1&mute=1`}
           allowFullScreen
-          allow="autoplay"
+          allow="autoplay; fullscreen"
         />
 
-        {/* Transparent overlay to prevent iframe interaction */}
-        <div className="absolute inset-0" />
+        {/* Clickable overlay for play/pause */}
+        <div
+          className="absolute inset-0 cursor-pointer"
+          onClick={toggleYouTubePlay}
+        />
 
         {/* Back button - show when paused */}
         {!isPlaying && onBack && (
