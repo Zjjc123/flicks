@@ -29,7 +29,7 @@ export default function FilmDetailPage() {
   return (
     <main className="min-h-screen bg-neutral-950 pb-20">
       <div className="relative h-[60vh]">
-        {isPlaying ? (
+        {isPlaying && film.videoUrl ? (
           <div className="w-full h-full">
             <VideoPlayer
               src={film.videoUrl}
@@ -45,31 +45,33 @@ export default function FilmDetailPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 to-transparent" />
 
-            {/* Play button */}
-            <button
-              onClick={() => {
-                setIsPlaying(true);
-                setIsVideoPlaying(true);
-              }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                       bg-white/10 hover:bg-white/20 backdrop-blur-sm 
-                       text-white p-4 rounded-full transition-colors
-                       flex items-center justify-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                className="w-8 h-8"
+            {/* Play button - only show if videoUrl exists */}
+            {film.videoUrl && (
+              <button
+                onClick={() => {
+                  setIsPlaying(true);
+                  setIsVideoPlaying(true);
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                         bg-white/10 hover:bg-white/20 backdrop-blur-sm 
+                         text-white p-4 rounded-full transition-colors
+                         flex items-center justify-center"
               >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-8 h-8"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+            )}
           </>
         )}
 
-        {/* Back button - show when not playing or video is paused */}
-        {!isVideoPlaying && (
+        {/* Back button - show when not playing or video is paused or videoUrl does not exist */}
+        {(!isVideoPlaying || !film.videoUrl) && (
           <button
             onClick={() => router.back()}
             className="absolute top-4 left-4 z-10 bg-black/50 backdrop-blur-sm text-white p-2 rounded-sm hover:bg-black/70 transition-colors"
