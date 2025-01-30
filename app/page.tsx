@@ -6,8 +6,11 @@ import { FilterSection } from "@/components/FilterSection";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Explore } from "@/components/Explore";
+import { films } from "./data/films";
 
 type Tab = "EXPLORE" | "FILTERS";
+
+const featuredFilm = films[0];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>("EXPLORE");
@@ -15,12 +18,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-neutral-950 pb-20">
       <Featured
-        title="RABBIT"
-        rating={9.3}
-        genres={["DRAMA", "EXPERIMENTAL"]}
-        description="On an afternoon in the countryside, we follow Anna's childhood memory of her Grandfather and learn about a complex relationship as events unfold."
-        image="/films/rabbit.png"
-        awards={["Best First-Time Female Director"]}
+        id={featuredFilm.id}
+        title={featuredFilm.title}
+        rating={featuredFilm.rating}
+        genres={featuredFilm.genres}
+        description={featuredFilm.details.description}
+        image={featuredFilm.imageUrl}
+        awards={featuredFilm.awards.map((award) => award.award)}
       />
 
       <div className="flex w-full justify-center gap-8 mb-4 pt-4">

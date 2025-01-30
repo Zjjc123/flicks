@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 interface FilmCardProps {
-  id: number;
+  id: string;
   title: string;
   rating: number;
   genres: string[];

@@ -14,7 +14,7 @@ export default function FilmDetailPage() {
   const [activeTab, setActiveTab] = useState<Tab>("DETAILS");
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const film = films.find((m) => m.id === Number(id));
+  const film = films.find((m) => m.id === id);
 
   if (!film) {
     return (
@@ -47,7 +47,10 @@ export default function FilmDetailPage() {
 
             {/* Play button */}
             <button
-              onClick={() => setIsPlaying(true)}
+              onClick={() => {
+                setIsPlaying(true);
+                setIsVideoPlaying(true);
+              }}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                        bg-white/10 hover:bg-white/20 backdrop-blur-sm 
                        text-white p-4 rounded-full transition-colors

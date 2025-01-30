@@ -1,7 +1,9 @@
 import { Button } from "./ui/button";
 import { GiOlive } from "react-icons/gi";
+import { useRouter } from "next/navigation";
 
 interface FeaturedProps {
+  id: string;
   title: string;
   rating: number;
   genres: string[];
@@ -11,6 +13,7 @@ interface FeaturedProps {
 }
 
 export function Featured({
+  id,
   title,
   rating,
   genres,
@@ -18,6 +21,8 @@ export function Featured({
   image,
   awards,
 }: FeaturedProps) {
+  const router = useRouter();
+
   return (
     <div className="relative h-[50vh] w-full">
       {/* Background Image */}
@@ -72,14 +77,19 @@ export function Featured({
 
         {/* Action Buttons */}
         <div className="flex gap-4">
-          <Button variant="default" size="lg">
+          {/* <Button
+            variant="default"
+            size="lg"
+            onClick={() => router.push(`/films/${id}`)}
+          >
             WATCH
-          </Button>
-          <Button variant="secondary" size="lg">
+          </Button> */}
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => router.push(`/films/${id}`)}
+          >
             MORE
-          </Button>
-          <Button variant="ghost" size="icon">
-            <PlusIcon className="h-6 w-6" />
           </Button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 export interface Film {
-  id: number;
+  id: string;
   title: string;
   rating: number;
   genres: string[];
@@ -51,7 +51,7 @@ export const filterOptions = {
 
 export const films: Film[] = [
   {
-    id: 1,
+    id: "rabbit",
     title: "Rabbit",
     rating: 9.3,
     genres: ["Drama", "Experimental"],
@@ -97,7 +97,7 @@ export const films: Film[] = [
     videoUrl: "https://www.youtube.com/watch?v=RTTvB4UaEZA",
   },
   {
-    id: 2,
+    id: "i-left-my-home",
     title: "I Left My Home",
     rating: 8.1,
     genres: ["Sci-Fi", "Experimental"],
@@ -127,7 +127,7 @@ export const films: Film[] = [
     ],
   },
   {
-    id: 3,
+    id: "kairos",
     title: "Kairos",
     rating: 7.4,
     genres: ["Experimental", "Sci-Fi"],
@@ -162,7 +162,7 @@ export const films: Film[] = [
     ],
   },
   {
-    id: 4,
+    id: "metasis",
     title: "Metasis",
     rating: 8.5,
     genres: ["Sci-Fi", "Drama"],
@@ -192,7 +192,7 @@ export const films: Film[] = [
     ],
   },
   {
-    id: 5,
+    id: "the-sweetness-of-lapse",
     title: "The Sweetness Of Lapse",
     rating: 7.1,
     genres: ["Sci-Fi", "Experimental"],
@@ -222,7 +222,7 @@ export const films: Film[] = [
     ],
   },
   {
-    id: 6,
+    id: "together-alone",
     title: "Together Alone",
     rating: 7.1,
     genres: ["Sci-Fi", "Experimental"],
@@ -252,7 +252,7 @@ export const films: Film[] = [
     ],
   },
   {
-    id: 7,
+    id: "wild-will",
     title: "Wild Will",
     rating: 8.2,
     genres: ["Experimental", "Sci-Fi"],
